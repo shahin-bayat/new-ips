@@ -51,6 +51,10 @@ async function main() {
   if (addedIPs.length > 0) {
     console.log(`Found ${addedIPs.length} new IPs`)
     console.log(addedIPs)
+
+    for (const ip of addedIPs) {
+      await updateARecords(process.env.DOMAIN, ip)
+    }
     await fs.promises.writeFile(NEW_FILE_PATH, addedIPs.join("\n"))
   } else {
     console.log("no new IPs found")

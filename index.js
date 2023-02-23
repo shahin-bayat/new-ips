@@ -1,5 +1,7 @@
 const { main } = require("./fetchAndUpdateIPs")
 
+const MINUTE = 1000 * 60
+
 setInterval(async () => {
   await main()
-}, 1000 * 60 * 15)
+}, MINUTE * 10)
