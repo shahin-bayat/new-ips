@@ -1,6 +1,6 @@
 const fs = require("fs")
 const axios = require("axios")
-const { updateARecords } = require("./updateARecords")
+const { updateARecords, deleteARecords } = require("./updateARecords")
 
 const OLD_FILE_PATH = "old.txt"
 const NEW_FILE_PATH = "new.txt"
@@ -51,6 +51,8 @@ async function main() {
   if (addedIPs.length > 0) {
     console.log(`Found ${addedIPs.length} new IPs`)
     console.log(addedIPs)
+
+    await deleteARecords(process.env.DOMAIN)
 
     for (const ip of addedIPs) {
       await updateARecords(process.env.DOMAIN, ip)
